@@ -1,4 +1,4 @@
-package com.grabieckacper.libgame.view.theme
+package com.grabieckacper.libgame.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
