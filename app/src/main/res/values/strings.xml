@@ -7,4 +7,7 @@
     <string name="played">Zagrane</string>
     <string name="add_game">Dodaj grę</string>
     <string name="go_back">Wróć</string>
+    <string name="search">Wyszukaj</string>
+    <string name="clear">Wyczyść</string>
+    <string name="remove">Usuń</string>
 </resources>
