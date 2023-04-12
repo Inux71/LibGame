@@ -1,5 +1,6 @@
 package com.grabieckacper.libgame.presentation.screens.dashboard
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,18 +15,27 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabieckacper.libgame.R
 import com.grabieckacper.libgame.common.components.SearchField
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
+    viewModel: DashboardViewModel = hiltViewModel(),
     onNavigateToLogin: () -> Unit,
     onNavigateToAddGame: () -> Unit
 ) {
+    val context = LocalContext.current
+    val coroutine = rememberCoroutineScope()
+    val user = viewModel.getUser()
+
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -42,7 +52,7 @@ fun DashboardScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "User")
+                    Text(text = user?.displayName ?: "")
                 },
                 actions = {
                     IconButton(onClick = {
@@ -65,9 +75,27 @@ fun DashboardScreen(
                                 Text(text = stringResource(id = R.string.logout))
                             },
                             onClick = {
-                                expanded = false
+                                coroutine.launch {
+                                    expanded = false
 
-                                onNavigateToLogin()
+                                    viewModel.auth
+                                        .signOut(context)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(
+                                                context,
+                                                "Pomyślnie wylogowano!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }.addOnFailureListener {
+                                            Toast.makeText(
+                                                context,
+                                                "Podczas wylogowania wystąpił błąd!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }.await()
+
+                                    onNavigateToLogin()
+                                }
                             }
                         )
                     }
