@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.grabieckacper.libgame.view.screens.login.LoginScreen
 import com.grabieckacper.libgame.view.theme.LibGameTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             LibGameTheme(darkTheme = false) {
-
+                LoginScreen()
             }
         }
     }

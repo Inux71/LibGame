@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LibGame</string>
+    <string name="login">Zaloguj się</string>
 </resources>
