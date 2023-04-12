@@ -2,6 +2,7 @@ package com.grabieckacper.libgame.presentation.screens.dashboard
 
 import androidx.lifecycle.ViewModel
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.grabieckacper.libgame.model.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,6 @@ class DashboardViewModel @Inject constructor(
         get() = this._auth
 
     fun getUser(): FirebaseUser? {
-        return this._authRepository.getUser()
+        return FirebaseAuth.getInstance().currentUser
     }
 }
