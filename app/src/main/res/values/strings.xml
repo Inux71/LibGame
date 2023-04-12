@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LibGame</string>
     <string name="login">Zaloguj się</string>
+    <string name="open_settings">Otwórz ustawienia</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="playing">Grane</string>
+    <string name="played">Zagrane</string>
+    <string name="add_game">Dodaj grę</string>
+    <string name="go_back">Wróć</string>
 </resources>

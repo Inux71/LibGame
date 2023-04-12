@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.grabieckacper.libgame.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +37,7 @@ fun DashboardScreen() {
                         content = {
                             Icon(
                                 imageVector = Icons.Default.MoreVert,
-                                contentDescription = "Otwórz ustawienia"
+                                contentDescription = stringResource(id = R.string.open_settings)
                             )
                         }
                     )
@@ -49,7 +50,7 @@ fun DashboardScreen() {
                         content = {
                             DropdownMenuItem(
                                 text = {
-                                    Text(text = "Wyloguj się")
+                                    Text(text = stringResource(id = R.string.logout))
                                 },
                                 onClick = {
                                     expanded = false
@@ -70,7 +71,7 @@ fun DashboardScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_videogame_asset_off_24),
-                            contentDescription = "Do zagrania"
+                            contentDescription = stringResource(id = R.string.playing)
                         )
                     }
                 )
@@ -83,7 +84,7 @@ fun DashboardScreen() {
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_videogame_asset_24),
-                            contentDescription = "Zagrane"
+                            contentDescription = stringResource(id = R.string.played)
                         )
                     }
                 )
@@ -97,7 +98,7 @@ fun DashboardScreen() {
                 content = {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Dodaj grę"
+                        contentDescription = stringResource(id = R.string.add_game)
                     )
                 }
             )
