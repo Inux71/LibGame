@@ -1,4 +1,4 @@
-package com.grabieckacper.libgame.ui.theme
+package com.grabieckacper.libgame.view.theme
 
 import androidx.compose.ui.graphics.Color
 
