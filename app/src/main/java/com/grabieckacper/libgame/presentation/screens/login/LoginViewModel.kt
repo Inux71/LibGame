@@ -2,7 +2,6 @@ package com.grabieckacper.libgame.presentation.screens.login
 
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.grabieckacper.libgame.R
 import com.grabieckacper.libgame.model.repository.AuthRepository
@@ -24,6 +23,6 @@ class LoginViewModel @Inject constructor(
         get() = this._signInIntent
 
     fun getUser(): FirebaseUser? {
-        return FirebaseAuth.getInstance().currentUser
+        return this._authRepository.getUser()
     }
 }
