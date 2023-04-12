@@ -52,7 +52,13 @@ fun LoginScreen(
         )
 
         Button(onClick = {
-            signInLauncher.launch(viewModel.signInIntent)
+            val user = viewModel.getUser()
+
+            if (user != null) {
+                onNavigateToDashboard()
+            } else {
+                signInLauncher.launch(viewModel.signInIntent)
+            }
         }) {
             Text(text = stringResource(id = R.string.login))
         }
