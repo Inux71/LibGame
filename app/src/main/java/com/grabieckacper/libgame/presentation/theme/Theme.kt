@@ -1,4 +1,4 @@
-package com.grabieckacper.libgame.view.theme
+package com.grabieckacper.libgame.presentation.theme
 
 import android.app.Activity
 import android.os.Build

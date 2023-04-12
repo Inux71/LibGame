@@ -1,4 +1,4 @@
-package com.grabieckacper.libgame.view.screens.login
+package com.grabieckacper.libgame.presentation.screens.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
