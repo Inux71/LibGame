@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "292101907596",
+    "project_id": "libgame-aaa16",
+    "storage_bucket": "libgame-aaa16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292101907596:android:1fde619adf5269da1047a9",
+        "android_client_info": {
+          "package_name": "com.grabieckacper.libgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292101907596-062ipkjio24n5cuo9u8rkjouk9hfgl5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm3kugV1i1Y6p5qXWcI8FVJR37iXz8XQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292101907596-062ipkjio24n5cuo9u8rkjouk9hfgl5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
