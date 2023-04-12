@@ -14,24 +14,22 @@ import androidx.compose.ui.unit.sp
 import com.grabieckacper.libgame.R
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(onNavigateToDashboard: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        content = {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
-            )
-            
-            Button(
-                onClick = {},
-                content = {
-                    Text(text = stringResource(id = R.string.login))
-                }
-            )
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = R.string.app_name),
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Button(onClick = {
+            onNavigateToDashboard()
+        }) {
+            Text(text = stringResource(id = R.string.login))
         }
-    )
+    }
 }

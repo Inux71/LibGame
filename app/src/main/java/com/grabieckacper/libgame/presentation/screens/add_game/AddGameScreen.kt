@@ -12,7 +12,7 @@ import com.grabieckacper.libgame.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddGameScreen() {
+fun AddGameScreen(onNavigateToDashboard: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -20,22 +20,18 @@ fun AddGameScreen() {
                     Text(text = stringResource(id = R.string.add_game))
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {
-
-                        },
-                        content = {
-                            Icon(
-                                imageVector = Icons.Default.ArrowBack,
-                                contentDescription = stringResource(id = R.string.go_back)
-                            )
-                        }
-                    )
+                    IconButton(onClick = {
+                        onNavigateToDashboard()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = stringResource(id = R.string.go_back)
+                        )
+                    }
                 }
             )
-        },
-        content = { contentPadding ->
-            Box(modifier = Modifier.padding(contentPadding))
         }
-    )
+    ) { contentPadding ->
+        Box(modifier = Modifier.padding(contentPadding))
+    }
 }

@@ -14,7 +14,10 @@ import com.grabieckacper.libgame.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    onNavigateToLogin: () -> Unit,
+    onNavigateToAddGame: () -> Unit
+) {
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -30,34 +33,32 @@ fun DashboardScreen() {
                     Text(text = "User")
                 },
                 actions = {
-                    IconButton(
-                        onClick = {
-                            expanded = true
-                        },
-                        content = {
-                            Icon(
-                                imageVector = Icons.Default.MoreVert,
-                                contentDescription = stringResource(id = R.string.open_settings)
-                            )
-                        }
-                    )
+                    IconButton(onClick = {
+                        expanded = true
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = stringResource(id = R.string.open_settings)
+                        )
+                    }
 
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = {
                             expanded = false
-                        },
-                        content = {
-                            DropdownMenuItem(
-                                text = {
-                                    Text(text = stringResource(id = R.string.logout))
-                                },
-                                onClick = {
-                                    expanded = false
-                                }
-                            )
                         }
-                    )
+                    ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text(text = stringResource(id = R.string.logout))
+                            },
+                            onClick = {
+                                expanded = false
+
+                                onNavigateToLogin()
+                            }
+                        )
+                    }
                 }
             )
         },
@@ -91,20 +92,16 @@ fun DashboardScreen() {
             })
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-
-                },
-                content = {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(id = R.string.add_game)
-                    )
-                }
-            )
-        },
-        content = { contentPadding ->
-            Box(modifier = Modifier.padding(contentPadding))
+            FloatingActionButton(onClick = {
+                onNavigateToAddGame()
+            }) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(id = R.string.add_game)
+                )
+            }
         }
-    )
+    ) { contentPadding ->
+        Box(modifier = Modifier.padding(contentPadding))
+    }
 }
