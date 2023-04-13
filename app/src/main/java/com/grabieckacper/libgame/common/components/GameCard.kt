@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -89,13 +90,20 @@ fun GameCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(
-                        modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp),
+                        modifier = if (isUserGame) {
+                            Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+                                .fillMaxWidth(0.6f)
+                        } else {
+                            Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+                        },
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.Start
                     ) {
                         Text(
                             text = gameTitle,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            overflow =  TextOverflow.Ellipsis,
+                            maxLines = 1
                         )
 
                         Text(
@@ -109,8 +117,7 @@ fun GameCard(
                             expanded = expanded,
                             onExpandedChange = {
                                 expanded = !expanded
-                            },
-                            modifier = Modifier.fillMaxWidth(0.5f)
+                            }
                         ) {
                             TextField(
                                 value = selectedStatus.name,
