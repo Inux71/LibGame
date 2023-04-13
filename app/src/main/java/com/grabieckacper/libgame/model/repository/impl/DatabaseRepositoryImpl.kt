@@ -13,7 +13,7 @@ class DatabaseRepositoryImpl : DatabaseRepository {
     private val _database = Firebase.database(AppConfig.DATABASE_URL)
     private val _gamesRef = this._database.getReference("games")
 
-    override fun fetchGames(games: MutableList<Game>, updateStateCallback: () -> Unit) {
+    override fun fetchGames(updateStateCallback: (games: List<Game>) -> Unit) {
         this._gamesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -22,10 +22,7 @@ class DatabaseRepositoryImpl : DatabaseRepository {
                     dataSnapshot.getValue(Game::class.java)!!
                 }
 
-                games.clear()
-                games.addAll(g)
-
-                updateStateCallback()
+                updateStateCallback(g)
             }
         })
     }

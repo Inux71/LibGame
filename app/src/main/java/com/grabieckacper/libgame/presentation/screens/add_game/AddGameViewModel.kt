@@ -24,9 +24,14 @@ class AddGameViewModel @Inject constructor(
     private val _games = mutableListOf<Game>()
 
     init {
-        this._databaseRepository.fetchGames(this._games) {
+        this._databaseRepository.fetchGames { games ->
+            this._state.value = this._state.value.copy(isLoading = true)
+
+            this._games.clear()
+            this._games.addAll(games)
+
             this._state.value = this._state.value.copy(
-                isLoading = this._games.isEmpty(),
+                isLoading = false,
                 games = this._games
             )
         }
