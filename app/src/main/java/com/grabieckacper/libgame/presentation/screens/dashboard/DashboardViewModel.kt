@@ -90,4 +90,8 @@ class DashboardViewModel @Inject constructor(
     fun removeGameFromUser(gameId: Long) {
         this._databaseRepository.removeGameFromUser(gameId)
     }
+
+    fun updateGameStatus(gameId: Long, status: Status) {
+        this._databaseRepository.updateGameStatus(gameId, status)
+    }
 }

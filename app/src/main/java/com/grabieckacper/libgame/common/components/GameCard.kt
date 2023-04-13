@@ -136,8 +136,6 @@ fun GameCard(
                                 expanded = expanded,
                                 onDismissRequest = {
                                     expanded = false
-
-                                    onUpdateGame()
                                 }
                             ) {
                                 statusList.forEach { status ->
@@ -148,6 +146,7 @@ fun GameCard(
                                         onClick = {
                                             selectedStatus = status
                                             expanded = false
+                                            onUpdateGame()
                                         }
                                     )
                                 }

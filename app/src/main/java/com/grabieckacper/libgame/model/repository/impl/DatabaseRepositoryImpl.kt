@@ -88,4 +88,13 @@ class DatabaseRepositoryImpl(private val _userId: String) : DatabaseRepository {
             .child(gameId.toString())
             .removeValue()
     }
+
+    override fun updateGameStatus(gameId: Long, status: Status) {
+        val userGame = UserGame(gameId, status)
+
+        this._userGamesRef
+            .child(this._userId)
+            .child(gameId.toString())
+            .setValue(userGame)
+    }
 }
