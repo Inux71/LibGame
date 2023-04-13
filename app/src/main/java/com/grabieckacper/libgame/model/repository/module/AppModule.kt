@@ -1,5 +1,6 @@
 package com.grabieckacper.libgame.model.repository.module
 
+import com.google.firebase.auth.FirebaseAuth
 import com.grabieckacper.libgame.model.repository.AuthRepository
 import com.grabieckacper.libgame.model.repository.DatabaseRepository
 import com.grabieckacper.libgame.model.repository.impl.AuthRepositoryImpl
@@ -22,6 +23,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabaseRepository(): DatabaseRepository {
-        return DatabaseRepositoryImpl()
+        return DatabaseRepositoryImpl(FirebaseAuth.getInstance().currentUser!!.uid)
     }
 }

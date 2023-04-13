@@ -44,4 +44,8 @@ class AddGameViewModel @Inject constructor(
 
         this._state.value = this._state.value.copy(games = filteredGames)
     }
+
+    fun addGameToUser(gameId: Long): Boolean {
+        return this._databaseRepository.addGameToUser(gameId)
+    }
 }
