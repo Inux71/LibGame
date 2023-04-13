@@ -15,12 +15,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabieckacper.libgame.R
+import com.grabieckacper.libgame.common.components.GameCard
 import com.grabieckacper.libgame.common.components.SearchField
+import com.grabieckacper.libgame.common.enums.Status
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddGameScreen(onNavigateToDashboard: () -> Unit) {
+fun AddGameScreen(
+    viewModel: AddGameViewModel = hiltViewModel(),
+    onNavigateToDashboard: () -> Unit
+) {
+    val state = viewModel.state
+
     var searchText by remember {
         mutableStateOf(TextFieldValue(""))
     }
@@ -56,6 +64,8 @@ fun AddGameScreen(onNavigateToDashboard: () -> Unit) {
                     value = searchText,
                     onValueChange = {
                         searchText = it
+
+                        viewModel.filterGames(searchText.text)
                     },
                     modifier = Modifier.fillMaxWidth(0.75f),
                     placeholder = {
@@ -71,6 +81,8 @@ fun AddGameScreen(onNavigateToDashboard: () -> Unit) {
                         if (searchText.text.isNotEmpty()) {
                             IconButton(onClick = {
                                 searchText = TextFieldValue("")
+
+                                viewModel.filterGames(searchText.text)
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -80,6 +92,25 @@ fun AddGameScreen(onNavigateToDashboard: () -> Unit) {
                         }
                     }
                 )
+            }
+
+            if (state.value.isLoading) {
+                item {
+                    Text(text = stringResource(id = R.string.loading))
+                }
+            } else {
+                items(state.value.games.size) { index ->
+                    GameCard(
+                        isUserGame = false,
+                        gameImageUrl = state.value.games[index].thumbnail!!,
+                        gameTitle = state.value.games[index].title!!,
+                        gameGenre = state.value.games[index].genre!!,
+                        currentStatus = Status.PLAYING,
+                        onAddGame = {},
+                        onRemoveGame = {},
+                        onUpdateGame = {}
+                    )
+                }
             }
         }
     }
