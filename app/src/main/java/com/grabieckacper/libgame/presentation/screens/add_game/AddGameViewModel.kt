@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 data class AddGameState(
-    val isLoading: Boolean = true,
     val games: List<Game> = emptyList()
 )
 
@@ -21,20 +20,10 @@ class AddGameViewModel @Inject constructor(
     val state: State<AddGameState>
         get() = this._state
 
-    private val _games = mutableListOf<Game>()
+    private val _games = this._databaseRepository.games
 
     init {
-        this._databaseRepository.fetchGames { games ->
-            this._state.value = this._state.value.copy(isLoading = true)
-
-            this._games.clear()
-            this._games.addAll(games)
-
-            this._state.value = this._state.value.copy(
-                isLoading = false,
-                games = this._games
-            )
-        }
+        this._state.value = this._state.value.copy(games = this._games)
     }
 
     fun filterGames(searchText: String) {

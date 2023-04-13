@@ -1,6 +1,5 @@
 package com.grabieckacper.libgame.model.repository.impl
 
-import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -17,9 +16,19 @@ class DatabaseRepositoryImpl(private val _userId: String) : DatabaseRepository {
     private val _gamesRef = this._database.getReference("games")
     private val _userGamesRef = this._database.getReference("user-games")
 
+    private val _games = mutableListOf<Game>()
+    override val games: List<Game>
+        get() = this._games
+
     private val _userGames = mutableListOf<UserGame>()
 
-    override fun fetchGames(updateStateCallback: (games: List<Game>) -> Unit) {
+    private fun getGameById(gameId: Long): Game {
+        return this._games.first { game ->
+            game.id == gameId
+        }
+    }
+
+    override fun fetchGames() {
         this._gamesRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -28,12 +37,13 @@ class DatabaseRepositoryImpl(private val _userId: String) : DatabaseRepository {
                     dataSnapshot.getValue(Game::class.java)!!
                 }
 
-                updateStateCallback(g)
+                _games.clear()
+                _games.addAll(g)
             }
         })
     }
 
-    override fun fetchUserGames() {
+    override fun fetchUserGames(updateStateCallback: (userGames: List<Game>) -> Unit) {
         this._userGamesRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -47,6 +57,12 @@ class DatabaseRepositoryImpl(private val _userId: String) : DatabaseRepository {
 
                 _userGames.clear()
                 _userGames.addAll(ug)
+
+                updateStateCallback(ug.map { userGame ->
+                    val game = getGameById(userGame.gameId!!)
+                    game.status = userGame.status
+                    game
+                })
             }
         })
     }

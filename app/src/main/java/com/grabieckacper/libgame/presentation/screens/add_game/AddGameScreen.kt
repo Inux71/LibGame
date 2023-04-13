@@ -97,39 +97,33 @@ fun AddGameScreen(
                 )
             }
 
-            if (state.value.isLoading) {
-                item {
-                    Text(text = stringResource(id = R.string.loading))
-                }
-            } else {
-                items(state.value.games.size) { index ->
-                    GameCard(
-                        isUserGame = false,
-                        gameImageUrl = state.value.games[index].thumbnail!!,
-                        gameTitle = state.value.games[index].title!!,
-                        gameGenre = state.value.games[index].genre!!,
-                        currentStatus = Status.PLAYING,
-                        onAddGame = {
-                            if (viewModel.addGameToUser(state.value.games[index].id!!)) {
-                                Toast.makeText(
-                                    context,
-                                    "Dodano grę!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+            items(state.value.games.size) { index ->
+                GameCard(
+                    isUserGame = false,
+                    gameImageUrl = state.value.games[index].thumbnail!!,
+                    gameTitle = state.value.games[index].title!!,
+                    gameGenre = state.value.games[index].genre!!,
+                    currentStatus = Status.PLAYING,
+                    onAddGame = {
+                        if (viewModel.addGameToUser(state.value.games[index].id!!)) {
+                            Toast.makeText(
+                                context,
+                                "Dodano grę!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                                onNavigateToDashboard()
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Gra jest już dodana!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        },
-                        onRemoveGame = {},
-                        onUpdateGame = {}
-                    )
-                }
+                            onNavigateToDashboard()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Gra jest już dodana!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    },
+                    onRemoveGame = {},
+                    onUpdateGame = {}
+                )
             }
         }
     }
