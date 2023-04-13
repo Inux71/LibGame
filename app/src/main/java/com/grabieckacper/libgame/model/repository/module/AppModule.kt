@@ -1,7 +1,10 @@
 package com.grabieckacper.libgame.model.repository.module
 
+import com.google.firebase.auth.FirebaseAuth
 import com.grabieckacper.libgame.model.repository.AuthRepository
+import com.grabieckacper.libgame.model.repository.DatabaseRepository
 import com.grabieckacper.libgame.model.repository.impl.AuthRepositoryImpl
+import com.grabieckacper.libgame.model.repository.impl.DatabaseRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +18,11 @@ object AppModule {
     @Singleton
     fun provideAuthRepository(): AuthRepository {
         return AuthRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseRepository(): DatabaseRepository {
+        return DatabaseRepositoryImpl(FirebaseAuth.getInstance().currentUser!!.uid)
     }
 }

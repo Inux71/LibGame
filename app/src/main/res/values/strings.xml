@@ -10,4 +10,5 @@
     <string name="search">Wyszukaj</string>
     <string name="clear">Wyczyść</string>
     <string name="remove">Usuń</string>
+    <string name="loading">Wczytywanie…</string>
 </resources>

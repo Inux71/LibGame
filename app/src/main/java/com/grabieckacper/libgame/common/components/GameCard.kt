@@ -45,6 +45,7 @@ fun GameCard(
     Card(modifier = Modifier
         .fillMaxWidth(0.9f)
         .aspectRatio(1.5f)
+        .padding(0.dp, 10.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             AsyncImage(
@@ -135,8 +136,6 @@ fun GameCard(
                                 expanded = expanded,
                                 onDismissRequest = {
                                     expanded = false
-
-                                    onUpdateGame()
                                 }
                             ) {
                                 statusList.forEach { status ->
@@ -147,6 +146,7 @@ fun GameCard(
                                         onClick = {
                                             selectedStatus = status
                                             expanded = false
+                                            onUpdateGame()
                                         }
                                     )
                                 }

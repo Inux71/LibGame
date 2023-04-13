@@ -21,7 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabieckacper.libgame.R
+import com.grabieckacper.libgame.common.components.GameCard
 import com.grabieckacper.libgame.common.components.SearchField
+import com.grabieckacper.libgame.common.enums.Status
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -32,6 +34,7 @@ fun DashboardScreen(
     onNavigateToLogin: () -> Unit,
     onNavigateToAddGame: () -> Unit
 ) {
+    val state = viewModel.state
     val context = LocalContext.current
     val coroutine = rememberCoroutineScope()
     val user = viewModel.getUser()
@@ -108,6 +111,9 @@ fun DashboardScreen(
                     selected = selectedView == 0,
                     onClick = {
                         selectedView = 0
+                        searchText = TextFieldValue("")
+
+                        viewModel.filterGames(searchText.text, Status.PLAYED)
                     },
                     icon = {
                         Icon(
@@ -121,6 +127,9 @@ fun DashboardScreen(
                     selected = selectedView == 1,
                     onClick = {
                         selectedView = 1
+                        searchText = TextFieldValue("")
+
+                        viewModel.filterGames(searchText.text, Status.PLAYING)
                     },
                     icon = {
                         Icon(
@@ -154,6 +163,11 @@ fun DashboardScreen(
                     value = searchText,
                     onValueChange = {
                         searchText = it
+
+                        viewModel.filterGames(
+                            searchText.text,
+                            if (selectedView == 0) Status.PLAYING else Status.PLAYED
+                        )
                     },
                     modifier = Modifier.fillMaxWidth(0.75f),
                     placeholder = {
@@ -169,6 +183,11 @@ fun DashboardScreen(
                         if (searchText.text.isNotEmpty()) {
                             IconButton(onClick = {
                                 searchText = TextFieldValue("")
+
+                                viewModel.filterGames(
+                                    searchText.text,
+                                    if (selectedView == 0) Status.PLAYING else Status.PLAYED
+                                )
                             }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -178,6 +197,58 @@ fun DashboardScreen(
                         }
                     }
                 )
+            }
+
+            if (state.value.isLoading) {
+                item {
+                    Text(text = stringResource(id = R.string.loading))
+                }
+            } else {
+                when (selectedView) {
+                    0 -> {
+                        items(state.value.playingGames.size) { index ->
+                            GameCard(
+                                isUserGame = true,
+                                gameImageUrl = state.value.playingGames[index].thumbnail!!,
+                                gameTitle = state.value.playingGames[index].title!!,
+                                gameGenre = state.value.playingGames[index].genre!!,
+                                currentStatus = state.value.playingGames[index].status!!,
+                                onAddGame = {},
+                                onRemoveGame = {
+                                    viewModel.removeGameFromUser(state.value.playingGames[index].id!!)
+                                },
+                                onUpdateGame = {
+                                    viewModel.updateGameStatus(
+                                        state.value.playingGames[index].id!!,
+                                        Status.PLAYED
+                                    )
+                                }
+                            )
+                        }
+                    }
+
+                    1 -> {
+                        items(state.value.playedGames.size) { index ->
+                            GameCard(
+                                isUserGame = true,
+                                gameImageUrl = state.value.playedGames[index].thumbnail!!,
+                                gameTitle = state.value.playedGames[index].title!!,
+                                gameGenre = state.value.playedGames[index].genre!!,
+                                currentStatus = state.value.playedGames[index].status!!,
+                                onAddGame = {},
+                                onRemoveGame = {
+                                    viewModel.removeGameFromUser(state.value.playedGames[index].id!!)
+                                },
+                                onUpdateGame = {
+                                    viewModel.updateGameStatus(
+                                        state.value.playedGames[index].id!!,
+                                        Status.PLAYING
+                                    )
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
