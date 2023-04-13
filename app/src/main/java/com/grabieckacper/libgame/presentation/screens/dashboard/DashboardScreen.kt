@@ -214,7 +214,9 @@ fun DashboardScreen(
                                 gameGenre = state.value.playingGames[index].genre!!,
                                 currentStatus = state.value.playingGames[index].status!!,
                                 onAddGame = {},
-                                onRemoveGame = {},
+                                onRemoveGame = {
+                                    viewModel.removeGameFromUser(state.value.playingGames[index].id!!)
+                                },
                                 onUpdateGame = {}
                             )
                         }
@@ -229,7 +231,9 @@ fun DashboardScreen(
                                 gameGenre = state.value.playedGames[index].genre!!,
                                 currentStatus = state.value.playedGames[index].status!!,
                                 onAddGame = {},
-                                onRemoveGame = {},
+                                onRemoveGame = {
+                                    viewModel.removeGameFromUser(state.value.playedGames[index].id!!)
+                                },
                                 onUpdateGame = {}
                             )
                         }

@@ -86,4 +86,8 @@ class DashboardViewModel @Inject constructor(
             }
         }
     }
+
+    fun removeGameFromUser(gameId: Long) {
+        this._databaseRepository.removeGameFromUser(gameId)
+    }
 }

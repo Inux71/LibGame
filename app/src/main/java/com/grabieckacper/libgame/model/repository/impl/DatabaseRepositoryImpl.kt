@@ -76,9 +76,16 @@ class DatabaseRepositoryImpl(private val _userId: String) : DatabaseRepository {
 
         this._userGamesRef
             .child(this._userId)
-            .push()
+            .child(gameId.toString())
             .setValue(userGame)
 
         return true
+    }
+
+    override fun removeGameFromUser(gameId: Long) {
+        this._userGamesRef
+            .child(this._userId)
+            .child(gameId.toString())
+            .removeValue()
     }
 }

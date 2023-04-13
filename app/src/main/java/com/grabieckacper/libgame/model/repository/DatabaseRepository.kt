@@ -7,4 +7,5 @@ interface DatabaseRepository {
     fun fetchGames()
     fun fetchUserGames(updateStateCallback: (userGames: List<Game>) -> Unit)
     fun addGameToUser(gameId: Long): Boolean
+    fun removeGameFromUser(gameId: Long)
 }
