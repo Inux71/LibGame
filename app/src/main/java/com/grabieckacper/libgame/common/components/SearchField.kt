@@ -1,7 +1,6 @@
 package com.grabieckacper.libgame.common.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -11,7 +10,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.TextFieldValue
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchField(
     value: TextFieldValue,
@@ -21,7 +19,7 @@ fun SearchField(
     leadingIcon: @Composable (() -> Unit)? = {},
     trailingIcon: @Composable (() -> Unit)? = {},
     shape: Shape = RoundedCornerShape(50),
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors(
+    colors: TextFieldColors = TextFieldDefaults.colors(
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent,
         disabledIndicatorColor = Color.Transparent,

@@ -91,7 +91,8 @@ fun GameCard(
                 ) {
                     Column(
                         modifier = if (isUserGame) {
-                            Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+                            Modifier
+                                .padding(10.dp, 0.dp, 0.dp, 0.dp)
                                 .fillMaxWidth(0.6f)
                         } else {
                             Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
@@ -132,7 +133,7 @@ fun GameCard(
                                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                                 },
                                 singleLine = true,
-                                colors = TextFieldDefaults.textFieldColors(
+                                colors = TextFieldDefaults.colors(
                                     focusedIndicatorColor = Color.Transparent,
                                     unfocusedIndicatorColor = Color.Transparent,
                                     disabledIndicatorColor = Color.Transparent
