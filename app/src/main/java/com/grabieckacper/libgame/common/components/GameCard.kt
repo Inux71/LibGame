@@ -31,7 +31,7 @@ fun GameCard(
     currentStatus: Status,
     onAddGame: () -> Unit,
     onRemoveGame: () -> Unit,
-    onUpdateGame: () -> Unit
+    onUpdateGame: (status: Status) -> Unit
 ) {
     val statusList = enumValues<Status>()
 
@@ -154,7 +154,7 @@ fun GameCard(
                                         onClick = {
                                             selectedStatus = status
                                             expanded = false
-                                            onUpdateGame()
+                                            onUpdateGame(selectedStatus)
                                         }
                                     )
                                 }

@@ -217,10 +217,10 @@ fun DashboardScreen(
                                 onRemoveGame = {
                                     viewModel.removeGameFromUser(state.value.playingGames[index].id!!)
                                 },
-                                onUpdateGame = {
+                                onUpdateGame = { status ->
                                     viewModel.updateGameStatus(
                                         state.value.playingGames[index].id!!,
-                                        Status.PLAYED
+                                        status
                                     )
                                 }
                             )
@@ -239,10 +239,10 @@ fun DashboardScreen(
                                 onRemoveGame = {
                                     viewModel.removeGameFromUser(state.value.playedGames[index].id!!)
                                 },
-                                onUpdateGame = {
+                                onUpdateGame = { status ->
                                     viewModel.updateGameStatus(
                                         state.value.playedGames[index].id!!,
-                                        Status.PLAYING
+                                        status
                                     )
                                 }
                             )
