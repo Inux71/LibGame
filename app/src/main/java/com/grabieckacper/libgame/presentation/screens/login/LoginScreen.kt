@@ -34,7 +34,7 @@ fun LoginScreen(
         } else {
             Toast.makeText(
                 context,
-                "Nie udało się zalogować!",
+                "Sign in failed!",
                 Toast.LENGTH_SHORT
             ).show()
         }

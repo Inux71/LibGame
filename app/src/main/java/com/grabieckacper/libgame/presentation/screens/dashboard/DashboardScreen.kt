@@ -86,13 +86,13 @@ fun DashboardScreen(
                                         .addOnSuccessListener {
                                             Toast.makeText(
                                                 context,
-                                                "Pomyślnie wylogowano!",
+                                                "Successfully signed out!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }.addOnFailureListener {
                                             Toast.makeText(
                                                 context,
-                                                "Podczas wylogowania wystąpił błąd!",
+                                                "Sign out failed!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }.await()

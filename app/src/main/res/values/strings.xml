@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">LibGame</string>
-    <string name="login">Zaloguj się</string>
-    <string name="open_settings">Otwórz ustawienia</string>
-    <string name="logout">Wyloguj się</string>
-    <string name="playing">Grane</string>
-    <string name="played">Zagrane</string>
-    <string name="add_game">Dodaj grę</string>
-    <string name="go_back">Wróć</string>
-    <string name="search">Wyszukaj</string>
-    <string name="clear">Wyczyść</string>
-    <string name="remove">Usuń</string>
-    <string name="loading">Wczytywanie…</string>
+    <string name="login">Sign in</string>
+    <string name="open_settings">Open settings</string>
+    <string name="logout">Sign out</string>
+    <string name="playing">Playing</string>
+    <string name="played">Played</string>
+    <string name="add_game">Add Game</string>
+    <string name="go_back">Back</string>
+    <string name="search">Search</string>
+    <string name="clear">Clear</string>
+    <string name="remove">Remove</string>
+    <string name="loading">Loading…</string>
 </resources>

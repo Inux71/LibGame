@@ -108,7 +108,7 @@ fun AddGameScreen(
                         if (viewModel.addGameToUser(state.value.games[index].id!!)) {
                             Toast.makeText(
                                 context,
-                                "Dodano grę!",
+                                "Game added!",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -116,7 +116,7 @@ fun AddGameScreen(
                         } else {
                             Toast.makeText(
                                 context,
-                                "Gra jest już dodana!",
+                                "The game is already added!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
